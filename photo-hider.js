@@ -28,11 +28,17 @@ setInterval(function() {
         return null;
     }
     
+    var forEach = function (array, callback, scope) {
+        for (var i = 0; i < array.length; i++) {
+            callback.call(scope, i, array[i]);
+        }
+    };
+    
     var badClasses = ['._6ks','._5inf'];
     var trashSelectors = badClasses.join(':not([trash="true"]),') + ':not([trash="true"])';
     
     var badImages = document.querySelectorAll(trashSelectors);
-    [].forEach.call(badImages, function(badImage){
+    forEach(badImages, function(badImage){
         badImage.setAttribute('trash', true);
         badImage.style.display = 'none';
         var show = document.createElement('button');
